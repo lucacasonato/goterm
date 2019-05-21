@@ -227,6 +227,20 @@ func Flush() {
 	Screen.Reset()
 }
 
+// Flush buffer and ensure that it will not overflow screen
+func FlushOnlyVisible() {
+	for idx, str := range strings.SplitAfter(Screen.String(), "\n") {
+		if idx > Height() {
+			break
+		}
+
+		Output.WriteString(str)
+	}
+
+	Output.Flush()
+	Screen.Reset()
+}
+
 // FlushAll buffer
 func FlushAll() {
 	for _, str := range strings.SplitAfter(Screen.String(), "\n") {
