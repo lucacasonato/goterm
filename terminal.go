@@ -227,6 +227,16 @@ func Flush() {
 	Screen.Reset()
 }
 
+// FlushAll buffer
+func FlushAll() {
+	for _, str := range strings.SplitAfter(Screen.String(), "\n") {
+		Output.WriteString(str)
+	}
+
+	Output.Flush()
+	Screen.Reset()
+}
+
 func Print(a ...interface{}) (n int, err error) {
 	return fmt.Fprint(Screen, a...)
 }
