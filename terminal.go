@@ -99,7 +99,7 @@ type sf func(int, string) string
 func applyTransform(str string, transform sf) (out string) {
 	out = ""
 
-	for idx, line := range strings.Split(str, "\n") {
+	for idx, line := range strings.SplitAfter(str, "\n") {
 		out += transform(idx, line)
 	}
 
